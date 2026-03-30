@@ -29,7 +29,7 @@ jobs:
       - name: Create kind cluster
         uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc # v1.14.0
       - name: Run tests
-        run: bundle exec rake spec
+        run: KUBECONFIG="$HOME/.kube/config" bundle exec rake spec
 
   build:
     needs: [test]
