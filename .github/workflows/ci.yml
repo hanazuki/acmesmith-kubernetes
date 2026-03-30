@@ -10,9 +10,6 @@ on:
   schedule:
     - cron: '0 15 * * 5'
 
-permissions:
-  contents: read
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -20,8 +17,12 @@ jobs:
       matrix:
         ruby:
           - '4.0'
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - uses: ruby/setup-ruby@3ff19f5e2baf30647122352b96108b1fbe250c64 # v1.299.0
         with:
           ruby-version: ${{ matrix.ruby }}
@@ -35,14 +36,19 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       id-token: write
       attestations: write
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - uses: ruby/setup-ruby@3ff19f5e2baf30647122352b96108b1fbe250c64 # v1.299.0
         with:
-         ruby-version: ruby
+          ruby-version: ruby
       - uses: release-gems/action/build@d437156fdb56ff38941834e0e8f86ea0b1f34751 # v1.1.0
+        with:
+          sandbox: true
 
   publish:
     if: startsWith(github.ref, 'refs/tags/')
