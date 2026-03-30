@@ -7,6 +7,8 @@ on:
     tags:
       - v*
   pull_request:
+  schedule:
+    - cron: '0 15 * * 5'
 
 permissions:
   contents: read
@@ -19,11 +21,13 @@ jobs:
         ruby:
           - '4.0'
     steps:
-      - uses: actions/checkout@v6
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: ruby/setup-ruby@3ff19f5e2baf30647122352b96108b1fbe250c64 # v1.299.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
+      - name: Create kind cluster
+        uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc # v1.14.0
       - name: Run tests
         run: bundle exec rake spec
 
@@ -34,11 +38,11 @@ jobs:
       id-token: write
       attestations: write
     steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-    - uses: ruby/setup-ruby@dffb23f65a78bba8db45d387d5ea1bbd6be3ef18 # v1.293.0
-      with:
-        ruby-version: ruby
-    - uses: release-gems/action/build@1248e982004d24660200e416455c8578ff348e89 # v1.0.3
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: ruby/setup-ruby@3ff19f5e2baf30647122352b96108b1fbe250c64 # v1.299.0
+        with:
+         ruby-version: ruby
+      - uses: release-gems/action/build@d437156fdb56ff38941834e0e8f86ea0b1f34751 # v1.1.0
 
   publish:
     if: startsWith(github.ref, 'refs/tags/')
@@ -49,4 +53,4 @@ jobs:
       contents: write
       id-token: write
     steps:
-    - uses: release-gems/action@1248e982004d24660200e416455c8578ff348e89 # v1.0.3
+      - uses: release-gems/action@d437156fdb56ff38941834e0e8f86ea0b1f34751 # v1.1.0

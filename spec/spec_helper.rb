@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "acmesmith/kubernetes"
 
 RSpec.configure do |config|

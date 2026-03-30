@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 RSpec.describe Acmesmith::Kubernetes do
   it "has a version number" do
