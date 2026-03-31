@@ -21,7 +21,7 @@ module Acmesmith
       TYPE_CERTIFICATE = 'acmesmith-kubernetes.hanazuki.dev/certificate'
       TYPE_CURRENT = 'acmesmith-kubernetes.hanazuki.dev/current-certificate'
 
-      def initialize(instance:, namespace: 'default', name_prefix: 'acmesmith-kubernetes-')
+      def initialize(instance:, namespace: 'default', name_prefix: 'acmesmith-')
         @instance = instance
         @namespace = namespace
         @name_prefix = name_prefix
