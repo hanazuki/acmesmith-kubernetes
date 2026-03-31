@@ -46,7 +46,7 @@ jobs:
       - uses: ruby/setup-ruby@3ff19f5e2baf30647122352b96108b1fbe250c64 # v1.299.0
         with:
           ruby-version: ruby
-      - uses: release-gems/action/build@d437156fdb56ff38941834e0e8f86ea0b1f34751 # v1.1.0
+      - uses: release-gems/action/build@4aaa7904a8e9de7f0f4a5b646e3cfe8f1e225c2b # v1.2.1
         with:
           sandbox: true
 
@@ -59,4 +59,4 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: release-gems/action@d437156fdb56ff38941834e0e8f86ea0b1f34751 # v1.1.0
+      - uses: release-gems/action@4aaa7904a8e9de7f0f4a5b646e3cfe8f1e225c2b # v1.2.1
