@@ -1,10 +1,10 @@
 require 'base64'
-require 'acmesmith/post_issuing_hooks/kubernetes_secrets'
+require 'acmesmith/post_issuing_hooks/kubernetes_secret'
 require 'acmesmith/certificate'
 require 'acmesmith/kubernetes'
 require_relative '../spec_helper'
 
-RSpec.describe Acmesmith::PostIssuingHooks::KubernetesSecrets do
+RSpec.describe Acmesmith::PostIssuingHooks::KubernetesSecret do
   include Acmesmith::Kubernetes
 
   let(:namespace) { 'default' }
