@@ -5,10 +5,10 @@ require 'base64'
 
 module Acmesmith
   module PostIssuingHooks
-    class KubernetesSecrets < Base
+    class KubernetesSecret < Base
       include Acmesmith::Kubernetes
 
-      def initialize(namespace:, name:, labels: {}, annotations: {})
+      def initialize(namespace: 'default', name:, labels: {}, annotations: {})
         @namespace = namespace
         @name = name
         @labels = labels
