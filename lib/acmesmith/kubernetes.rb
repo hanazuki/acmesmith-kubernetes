@@ -7,21 +7,31 @@ module Acmesmith
     INCLUSTER_TOKEN = -'/var/run/secrets/kubernetes.io/serviceaccount/token'
     INCLUSTER_CA = -'/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
 
-    def build_kubernetes_client
+    def build_kubernetes_client(api_version = 'v1')
+      if api_version.include?(?/)
+        api, version =  api_version.split(?/, 2)
+        path = "/apis/#{api}"
+      else
+        version = api_version
+        path = ''
+      end
+
       if kubeconfig = ENV['KUBECONFIG']
         config = Kubeclient::Config.read(kubeconfig)
         context = config.context
+        endpoint = "#{context.api_endpoint}#{path}"
         Kubeclient::Client.new(
-          context.api_endpoint, 'v1',
+          endpoint, version,
           ssl_options: context.ssl_options,
           auth_options: context.auth_options,
         )
       else
         host = ENV.fetch('KUBERNETES_SERVICE_HOST')
         port = ENV.fetch('KUBERNETES_SERVICE_PORT')
-        endpoint = "https://#{host.include?(':') ? "[#{host}]" : host}:#{port}"
+        base = "https://#{host.include?(':') ? "[#{host}]" : host}:#{port}"
+        endpoint = "#{base}#{path}"
         Kubeclient::Client.new(
-          endpoint, 'v1',
+          endpoint, version,
           auth_options: { bearer_token_file: INCLUSTER_TOKEN },
           ssl_options: { ca_file: INCLUSTER_CA },
         )
