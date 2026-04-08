@@ -18,7 +18,7 @@ GEM
       aws-sdk-route53
       aws-sdk-s3
       thor
-    addressable (2.8.9)
+    addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     aws-eventstream (1.4.0)
     aws-partitions (1.1228.0)
@@ -149,7 +149,7 @@ CHECKSUMS
   acme-client (2.0.30) sha256=fd87896fcbf5e143cde380a73cfbd87d816f50f619fded50e8fbb62b8ba70616
   acmesmith (2.9.0) sha256=67ad103b7f6c549a26edd0958ec84ae840900b17f84a76339046ac41ae5d6ce7
   acmesmith-kubernetes (0.1.0)
-  addressable (2.8.9) sha256=cc154fcbe689711808a43601dee7b980238ce54368d23e127421753e46895485
+  addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
   aws-eventstream (1.4.0) sha256=116bf85c436200d1060811e6f5d2d40c88f65448f2125bc77ffce5121e6e183b
   aws-partitions (1.1228.0) sha256=b7155f770b3082aaf55555cc70d14ed0cbbee3e6b1dc48d7e5cf360136dc7417
   aws-sdk-acm (1.101.0) sha256=5f5c34251316534d3702307952c449049e47bafa6052670356a44ad224ef9088
