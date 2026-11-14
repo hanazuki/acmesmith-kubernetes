@@ -20,15 +20,15 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@v6.0.2
         with:
           persist-credentials: false
-      - uses: ruby/setup-ruby@3ff19f5e2baf30647122352b96108b1fbe250c64 # v1.299.0
+      - uses: ruby/setup-ruby@v1.338.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: Create kind cluster
-        uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc # v1.14.0
+        uses: helm/kind-action@v1.14.0
       - name: Run tests
         run: KUBECONFIG="$HOME/.kube/config" bundle exec rake spec
 
@@ -40,13 +40,13 @@ jobs:
       id-token: write
       attestations: write
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@v6.0.2
         with:
           persist-credentials: false
-      - uses: ruby/setup-ruby@3ff19f5e2baf30647122352b96108b1fbe250c64 # v1.299.0
+      - uses: ruby/setup-ruby@v1.338.0
         with:
           ruby-version: ruby
-      - uses: release-gems/action/build@4aaa7904a8e9de7f0f4a5b646e3cfe8f1e225c2b # v1.2.1
+      - uses: release-gems/action/build@v1.2.1
         with:
           sandbox: true
 
@@ -59,4 +59,4 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: release-gems/action@4aaa7904a8e9de7f0f4a5b646e3cfe8f1e225c2b # v1.2.1
+      - uses: release-gems/action@v1.2.1
